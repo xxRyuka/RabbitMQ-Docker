@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sender", "Sender\Sender.csproj", "{2EDE8BAB-4DE4-4162-81B6-F0B3E90329D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receiver", "Receiver\Receiver.csproj", "{DC8F8F67-4668-4914-8630-DC7F225CE1BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2EDE8BAB-4DE4-4162-81B6-F0B3E90329D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EDE8BAB-4DE4-4162-81B6-F0B3E90329D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EDE8BAB-4DE4-4162-81B6-F0B3E90329D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EDE8BAB-4DE4-4162-81B6-F0B3E90329D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC8F8F67-4668-4914-8630-DC7F225CE1BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC8F8F67-4668-4914-8630-DC7F225CE1BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC8F8F67-4668-4914-8630-DC7F225CE1BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC8F8F67-4668-4914-8630-DC7F225CE1BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
