@@ -9,6 +9,8 @@ while (true)
     Console.Write("Mesaj gir (çıkmak için 'exit'): ");
     var input = Console.ReadLine();
 
+    Console.WriteLine("Kanal Seciniz");
+    int kanal = Convert.ToInt32(Console.ReadLine());
     if (string.Equals(input, "exit", StringComparison.OrdinalIgnoreCase))
         break; // kullanıcı 'exit' yazarsa çıkış
 
@@ -18,5 +20,6 @@ while (true)
         continue;
     }
 
-    Send.Main(input); // (Girilen inputu Send.Main'e gönder)
+    // DİNAMİK KANAL SECME AYARLİCAZ
+   await Send.Main(input); // (Girilen inputu Send.Main'e gönder)
 }

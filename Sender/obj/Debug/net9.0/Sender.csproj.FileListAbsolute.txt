@@ -16,3 +16,4 @@
 /home/ryuka/RiderProjects/RabbitMQ with Docker/Sender/obj/Debug/net9.0/Sender.pdb
 /home/ryuka/RiderProjects/RabbitMQ with Docker/Sender/obj/Debug/net9.0/Sender.genruntimeconfig.cache
 /home/ryuka/RiderProjects/RabbitMQ with Docker/Sender/obj/Debug/net9.0/ref/Sender.dll
+/home/ryuka/RiderProjects/RabbitMQ with Docker/Sender/obj/Debug/net9.0/Sender.sourcelink.json

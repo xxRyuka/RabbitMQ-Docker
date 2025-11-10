@@ -4,26 +4,35 @@ using RabbitMQ.Client;
 
 namespace Sender;
 
+public enum Channels
+{
+    Kanal1,
+    Kanal2,
+    Kanal3,
+    Kanal4,
+}
 public class Send
 {
-    public static async Task Main(string metin)
+    public static async Task Main(string metin,Channels kanal)
     {
         var factory = new ConnectionFactory()
         {
             HostName = "localhost",
+            UserName = "ryuka",
+            Password = "123",
         };
         await using var connection = await factory.CreateConnectionAsync();
 
         await using var channel = await connection.CreateChannelAsync();
 
-        channel.QueueDeclareAsync(
-            queue: "SelamKuyruk",
+        await channel.QueueDeclareAsync(
+            queue: kanal.ToString(),
             durable: false,
             exclusive: false,
             autoDelete: false,
             arguments: null
         );
-
+        
         var message = metin + "  ,RabbitMQ!";
         var body = Encoding.UTF8.GetBytes(message);
 

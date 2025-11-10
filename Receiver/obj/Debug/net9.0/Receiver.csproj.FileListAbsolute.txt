@@ -16,3 +16,4 @@
 /home/ryuka/RiderProjects/RabbitMQ with Docker/Receiver/obj/Debug/net9.0/Receiver.pdb
 /home/ryuka/RiderProjects/RabbitMQ with Docker/Receiver/obj/Debug/net9.0/Receiver.genruntimeconfig.cache
 /home/ryuka/RiderProjects/RabbitMQ with Docker/Receiver/obj/Debug/net9.0/ref/Receiver.dll
+/home/ryuka/RiderProjects/RabbitMQ with Docker/Receiver/obj/Debug/net9.0/Receiver.sourcelink.json

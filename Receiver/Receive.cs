@@ -10,7 +10,12 @@ public class Receive
 {
     public static async Task Main()
     {
-        var factory = new ConnectionFactory { HostName = "localhost" };
+        var factory = new ConnectionFactory
+        {
+            HostName = "localhost",
+            UserName = "ryuka",
+            Password = "123",
+        };
         await using var connection = await factory.CreateConnectionAsync();
         await using var channel = await connection.CreateChannelAsync();
 
@@ -25,20 +30,27 @@ public class Receive
         Console.WriteLine(" [*] Mesaj bekleniyor... Çıkmak için CTRL+C");
 
         var consumer = new AsyncEventingBasicConsumer(channel);
-        
-        
-        consumer.ReceivedAsync += async (sender, ea) =>
+
+        // 1. ADIM: Fonksiyonu burada, Main'in içinde tanımlıyoruz.
+        // channel degiskenini goremesi için aynı scope içinde local olarak tanımlıyorum fonksiyonu 
+        async Task OnMessageReceivedAsync(object sender, BasicDeliverEventArgs ea)
         {
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
-            Console.WriteLine($" [x] Alındı: {message}");
 
+            Console.WriteLine($"{message} mesajı alındı ");
+            Console.WriteLine($"{sender.GetType().FullName}");
             await channel.BasicAckAsync(ea.DeliveryTag, false);
-        };
+        }
 
-     
+
+        // 2. ADIM: Event'e (olaya) '+= ' ile fonksiyonumuzun adını vererek abone oluyoruz.
+        // Fonksiyonu çağırmadığımız için () parantezlerini kullanmıyoruz.
         
-        
+        // burdan (+= syntaxini ve Event Delegate mimarisini calışabilirsin) https://github.com/xxRyuka/Event-Delegate-Architecture-Example
+        consumer.ReceivedAsync += OnMessageReceivedAsync;
+
+
         await channel.BasicConsumeAsync(
             queue: "SelamKuyruk",
             autoAck: false,
@@ -46,10 +58,12 @@ public class Receive
         );
 
         // 〽️ Programın kapanmaması için sonsuz bekleme
-        await Task.Delay(-1); 
+        await Task.Delay(-1);
     }
     // TODO : Event muhabbetini kavrayip tekrar bakalım buna kendimiz yazamyi deneyelim
-    
+
+    // bunun burda calısmıyor olmasını sebebi Closure (kapsam) durumundan otürü channel e erişemiyor
+    // o sebeple fonksiyonu localde tanımlamamız gerekiyor 
     // private static async Task OnMessageReceived(IModel channel, BasicDeliverEventArgs e)
     // {
     //         var body = e.Body.ToArray();
