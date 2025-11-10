@@ -4,16 +4,9 @@ using RabbitMQ.Client;
 
 namespace Sender;
 
-public enum Channels
-{
-    Kanal1,
-    Kanal2,
-    Kanal3,
-    Kanal4,
-}
 public class Send
 {
-    public static async Task Main(string metin,Channels kanal)
+    public static async Task Main(string metin,string kanal)
     {
         var factory = new ConnectionFactory()
         {
@@ -26,7 +19,7 @@ public class Send
         await using var channel = await connection.CreateChannelAsync();
 
         await channel.QueueDeclareAsync(
-            queue: kanal.ToString(),
+            queue: kanal,
             durable: false,
             exclusive: false,
             autoDelete: false,
@@ -46,12 +39,12 @@ public class Send
         };
         await channel.BasicPublishAsync(
             exchange: "",
-            routingKey: "SelamKuyruk",
+            routingKey: kanal,
             mandatory: false,
             basicProperties: props,
             body: body
         );
         
-        Console.WriteLine($" {message} Gönderildi: ");
+        Console.WriteLine($" {kanal} kanalına ,{message} Gönderildi: ");
     }
 }

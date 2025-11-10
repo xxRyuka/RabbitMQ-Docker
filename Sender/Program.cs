@@ -10,7 +10,7 @@ while (true)
     var input = Console.ReadLine();
 
     Console.WriteLine("Kanal Seciniz");
-    int kanal = Convert.ToInt32(Console.ReadLine());
+    string kanal = Console.ReadLine();
     if (string.Equals(input, "exit", StringComparison.OrdinalIgnoreCase))
         break; // kullanıcı 'exit' yazarsa çıkış
 
@@ -19,7 +19,7 @@ while (true)
         Console.WriteLine("Boş mesaj gönderilemez!");
         continue;
     }
-
+//TODO: KANAL AYARLAMAIY FİXLİCEZ
     // DİNAMİK KANAL SECME AYARLİCAZ
-   await Send.Main(input); // (Girilen inputu Send.Main'e gönder)
+   await Send.Main(input,kanal); // (Girilen inputu Send.Main'e gönder)
 }

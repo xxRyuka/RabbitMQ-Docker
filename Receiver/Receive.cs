@@ -8,7 +8,7 @@ namespace Receiver;
 
 public class Receive
 {
-    public static async Task Main()
+    public static async Task Main(string channelOpt)
     {
         var factory = new ConnectionFactory
         {
@@ -20,14 +20,14 @@ public class Receive
         await using var channel = await connection.CreateChannelAsync();
 
         await channel.QueueDeclareAsync(
-            queue: "SelamKuyruk",
+            queue: channelOpt,
             durable: false,
             exclusive: false,
             autoDelete: false,
             arguments: null
         );
 
-        Console.WriteLine(" [*] Mesaj bekleniyor... Çıkmak için CTRL+C");
+        Console.WriteLine($" [*] {channelOpt} Kanalından Mesaj bekleniyor... Çıkmak için CTRL+C");
 
         var consumer = new AsyncEventingBasicConsumer(channel);
 
@@ -38,7 +38,7 @@ public class Receive
             var body = ea.Body.ToArray();
             var message = Encoding.UTF8.GetString(body);
 
-            Console.WriteLine($"{message} mesajı alındı ");
+            Console.WriteLine($"{message} mesajı alındı ,{channelOpt} kanalı dinleniliyor");
             Console.WriteLine($"{sender.GetType().FullName}");
             await channel.BasicAckAsync(ea.DeliveryTag, false);
         }
@@ -52,7 +52,7 @@ public class Receive
 
 
         await channel.BasicConsumeAsync(
-            queue: "SelamKuyruk",
+            queue: channelOpt,
             autoAck: false,
             consumer: consumer
         );
@@ -60,7 +60,7 @@ public class Receive
         // 〽️ Programın kapanmaması için sonsuz bekleme
         await Task.Delay(-1);
     }
-    // TODO : Event muhabbetini kavrayip tekrar bakalım buna kendimiz yazamyi deneyelim
+    // xTODO Event muhabbetini kavrayip tekrar bakalım buna kendimiz yazamyi deneyelim Hallettik
 
     // bunun burda calısmıyor olmasını sebebi Closure (kapsam) durumundan otürü channel e erişemiyor
     // o sebeple fonksiyonu localde tanımlamamız gerekiyor 
